@@ -1,20 +1,30 @@
 package com.tylerj.simplevm;
 
 public class Register {
-    private int value;
+    private int iValue;
+    private float fValue;
     private final String name;
 
     Register(String name) {
         this.name = name;
-        this.value = 0;
+        this.iValue = 0;
+        this.fValue = 0.0f;
     }
 
-    int getValue() {
-        return this.value;
+    int getiValue() {
+        return this.iValue;
     }
 
-    void setValue(int value) {
-        this.value = value;
+    void setiValue(int iValue) {
+        this.iValue = iValue;
+    }
+
+    float getfValue() {
+        return this.fValue;
+    }
+
+    void setfValue(int fValue) {
+        this.fValue = fValue;
     }
 
     public String getName() {

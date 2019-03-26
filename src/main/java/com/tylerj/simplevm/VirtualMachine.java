@@ -64,13 +64,13 @@ public class VirtualMachine {
                 sp++;
 
                 if (instruction.getRegister().equals("r1")) {
-                    r1.setValue(instruction.getOperands()[0]);
+                    r1.setiValue(instruction.getOperands()[0]);
                 } else if (instruction.getRegister().equals("r2")) {
-                    r2.setValue(instruction.getOperands()[0]);
+                    r2.setiValue(instruction.getOperands()[0]);
                 } else if (instruction.getRegister().equals("r3")) {
-                    r3.setValue(instruction.getOperands()[0]);
+                    r3.setiValue(instruction.getOperands()[0]);
                 } else if (instruction.getRegister().equals("r4")) {
-                    r4.setValue(instruction.getOperands()[0]);
+                    r4.setiValue(instruction.getOperands()[0]);
                 } else {
                     throw new IllegalStateException("Unknown register: " + instruction.getRegister());
                 }
@@ -78,13 +78,13 @@ public class VirtualMachine {
                 int i = 0;
 
                 if (instruction.getRegister().equals("r1")) {
-                    i = r1.getValue();
+                    i = r1.getiValue();
                 } else if (instruction.getRegister().equals("r2")) {
-                    i = r2.getValue();
+                    i = r2.getiValue();
                 } else if (instruction.getRegister().equals("r3")) {
-                    i = r3.getValue();
+                    i = r3.getiValue();
                 } else if (instruction.getRegister().equals("r4")) {
-                    i = r4.getValue();
+                    i = r4.getiValue();
                 } else {
                     throw new IllegalStateException("Unknown register: " + instruction.getRegister());
                 }
