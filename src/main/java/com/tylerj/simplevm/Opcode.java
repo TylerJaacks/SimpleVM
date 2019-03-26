@@ -4,9 +4,10 @@ public enum Opcode {
     HALT("HALT"),
     IADD("IADD"),
     ISUB("ISUB"),
-    ICONST("ICONST"),
+    PUSH("PUSH"),
     LOADVALUE("LOADVALUE"),
     READVALUE("READVALUE"),
+    NOP("NOP"),
     PRINT("PRINT");
 
     private final String opcode;

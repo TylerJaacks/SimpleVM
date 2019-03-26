@@ -1,49 +1,54 @@
 package com.tylerj.simplevm;
 
+/* TODO Cleanup this classes to have a more consistent way of calling the constructor, also maybe make an enum or registers. */
+/* OPCODE OPERANDS... */
+/* OPCODE */
+/* OPCODE REG OPERANDS */
+/* OPCODE REG */
 public class Instruction {
     private final Opcode opcode;
     private final int[] operands;
-    private final Register[] registers;
+    private final String register;
 
-    public Instruction(Opcode opcode) {
+    Instruction(Opcode opcode) {
         this.opcode = opcode;
         this.operands = new int[0];
-        this.registers = new Register[0];
+        this.register = null;
     }
 
-    public Instruction(Opcode opcode, int... operands) {
+    Instruction(Opcode opcode, int... operands) {
         this.opcode = opcode;
         this.operands = operands;
-        this.registers = new Register[0];
+        this.register = null;
     }
 
-    public Instruction(Opcode opcode, Register... registers) {
+    Instruction(Opcode opcode, String... registers) {
         this.opcode = opcode;
         this.operands = new int[0];
-        this.registers = registers;
+        this.register = null;
     }
 
-    public Instruction(Opcode opcode, Register register, int... operands) {
+    Instruction(Opcode opcode, String register, int... operands) {
         this.opcode = opcode;
         this.operands = operands;
-        this.registers = new Register[0];
+        this.register = register;
     }
 
-    public Instruction(Opcode opcode, int operand, Register... registers) {
+    Instruction(Opcode opcode, String register) {
         this.opcode = opcode;
-        this.operands = new int[0];
-        this.registers = registers;
+        this.operands = null;
+        this.register = register;
     }
 
-    public Opcode getOpcode() {
+    Opcode getOpcode() {
         return opcode;
     }
 
-    public int[] getOperands() {
+    int[] getOperands() {
         return operands;
     }
 
-    public Register[] getRegisters() {
-        return registers;
+    String getRegister() {
+        return this.register;
     }
 }

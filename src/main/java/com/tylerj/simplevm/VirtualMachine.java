@@ -11,18 +11,22 @@ public class VirtualMachine {
     private Register r3;
     private Register r4;
 
-    public VirtualMachine(int stackSize) {
+    VirtualMachine(int stackSize) {
+        this.r1 = new Register("r1");
+        this.r2 = new Register("r2");
+        this.r3 = new Register("r3");
+        this.r4 = new Register("r4");
         this.stack = new int[stackSize];
         this.sp = -1;
     }
 
-    public VirtualMachine(int[] stack, int stackSize, int ip, int stackPointer) {
+    public VirtualMachine(int[] stack, int stackSize, int ip, Register r1, Register r2, Register r3, Register r4, int stackPointer) {
         this.stack = stack;
         this.ip = ip;
         this.sp = stackPointer;
     }
 
-    public void execute(Instruction[] instructions) {
+    void execute(Instruction[] instructions) {
         while (ip < instructions.length) {
             Instruction instruction = instructions[ip];
 
@@ -34,7 +38,7 @@ public class VirtualMachine {
                 int i = stack[sp];
 
                 System.out.println(i);
-            } else if (instruction.getOpcode() == Opcode.ICONST) {
+            } else if (instruction.getOpcode() == Opcode.PUSH) {
                 int i = instruction.getOperands()[0];
 
                 sp++;
@@ -57,17 +61,40 @@ public class VirtualMachine {
 
                 stack[sp] = j - i;
             } else if (instruction.getOpcode() == Opcode.LOADVALUE) {
+                sp++;
 
-
+                if (instruction.getRegister().equals("r1")) {
+                    r1.setValue(instruction.getOperands()[0]);
+                } else if (instruction.getRegister().equals("r2")) {
+                    r2.setValue(instruction.getOperands()[0]);
+                } else if (instruction.getRegister().equals("r3")) {
+                    r3.setValue(instruction.getOperands()[0]);
+                } else if (instruction.getRegister().equals("r4")) {
+                    r4.setValue(instruction.getOperands()[0]);
+                } else {
+                    throw new IllegalStateException("Unknown register: " + instruction.getRegister());
+                }
             } else if (instruction.getOpcode() == Opcode.READVALUE) {
-                int i = instruction.getRegisters()[0].getValue();
+                int i = 0;
+
+                if (instruction.getRegister().equals("r1")) {
+                    i = r1.getValue();
+                } else if (instruction.getRegister().equals("r2")) {
+                    i = r2.getValue();
+                } else if (instruction.getRegister().equals("r3")) {
+                    i = r3.getValue();
+                } else if (instruction.getRegister().equals("r4")) {
+                    i = r4.getValue();
+                } else {
+                    throw new IllegalStateException("Unknown register: " + instruction.getRegister());
+                }
 
                 sp++;
 
                 stack[sp] = i;
-            }
-
-            else {
+            } else if (instruction.getOpcode() == Opcode.NOP) {
+                return;
+            } else {
                 throw new IllegalStateException("Unknown opcode: " + instruction.getOpcode());
             }
         }
